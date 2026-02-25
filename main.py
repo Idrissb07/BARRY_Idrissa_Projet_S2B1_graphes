@@ -1,44 +1,36 @@
-import networkx as nx
-from utils.display import draw_graph
-from utils.analysis import graph_info, is_regular
-from graphs.example_matrix import graph_from_matrix
-from graphs.example_dict import graph_from_dict
-
-
-def simple_graph():
-    G = nx.Graph()
-    G.add_edges_from([(1, 2), (1, 3), (2, 3), (2, 4)])
-    return G
+from data.network_data import create_social_network
+from analysis.social_metrics import basic_info, most_connected, centrality
+from visualization.draw import draw_network
 
 
 def menu():
+    G = create_social_network()
+
     while True:
-        print("\n--- GRAPH ANALYSIS TOOL ---")
-        print("1 - Simple graph")
-        print("2 - Graph from adjacency matrix")
-        print("3 - Graph from adjacency list")
+        print("\n--- SOCIAL NETWORK ANALYSIS ---")
+        print("1 - Basic info")
+        print("2 - Most connected person")
+        print("3 - Centrality")
+        print("4 - Show network")
         print("0 - Quit")
 
         choice = input("Choice: ")
 
         if choice == "1":
-            G = simple_graph()
-            graph_info(G)
-            print("Regular graph:", is_regular(G))
-            draw_graph(G, title="Simple Graph")
+            basic_info(G)
 
         elif choice == "2":
-            G = graph_from_matrix()
-            graph_info(G)
-            draw_graph(G, title="Graph from Matrix")
+            most_connected(G)
 
         elif choice == "3":
-            G = graph_from_dict()
-            graph_info(G)
-            draw_graph(G, title="Graph from Adjacency List")
+            centrality(G)
+
+        elif choice == "4":
+            draw_network(G)
 
         elif choice == "0":
             break
+
         else:
             print("Invalid choice")
 
