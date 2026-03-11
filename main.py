@@ -1,6 +1,7 @@
 from data.generate_network import generate_social_network
 from analysis.metrics import *
 from visualization.display import draw_graph
+from conversion.convert import from_adjacency_matrix
 import numpy as np
 
 
